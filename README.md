@@ -4,6 +4,8 @@
 >
 > 可执行文件就叫 **`clio`**，不带 `d` 后缀。
 
+> **状态**：本文与 [`../docs/PLAN.md`](../docs/PLAN.md) 同步；标【定】者已确认，未标注默认【待考证】。
+
 ## 职责
 
 `clio` 是系统中**唯一持有状态、唯一写存储**的组件。它同时产出两样东西：
@@ -20,11 +22,10 @@
 ```
 clio\
 ├─ CMakeLists.txt          （P0）
-├─ vcpkg.json              （P0）
-├─ include\herodotus\      公开头；库目标名 `herodotus`，可执行目标名 `clio`
+├─ include\herodotus\      公开头；库目标名 `herodotus`【待考证】，可执行目标名 `clio`
 ├─ src\
 │   ├─ ledger\             账本：SQLite，INSERT-only，事件溯源
-│   ├─ index\              索引：SQLite FTS5 + USearch 向量，可整体丢弃重建
+│   ├─ index\              索引：SQLite FTS5 + LanceDB 向量，可整体丢弃重建
 │   ├─ memory\             记忆库：per-persona、L0–L3、时效衰减
 │   ├─ knowledge\          知识库：全局共享、带出处与 char 区间、不衰减
 │   ├─ distill\            蒸馏管线：L1 抽取 / 去重合并 / L2 场景 / L3 画像
@@ -44,21 +45,21 @@ clio\
 
 | 需要 | 选择 | 备注 |
 | --- | --- | --- |
-| 语言 / 标准 | **C++20** | |
-| 构建 | **CMake + vcpkg**（manifest 模式） | |
-| 全文检索 | **SQLite FTS5**（先） / **Xapian**（备选） | 见 `docs/PLAN.md` §3.2 的 D1 |
-| 向量 ANN | **USearch** | header-only，可直接 vendor |
-| 中文分词 | **cppjieba** | |
-| 账本 / 索引 | **SQLite** | |
-| HTTP / JSON | `cpp-httplib` + `nlohmann/json` | 均 header-only |
-| 推理 | **llama-server**（独立进程，OpenAI 兼容 HTTP） | 不静态链接 |
+| 语言 / 标准 | **C++23**【定】 | |
+| 构建 | **CMake `FetchContent` + `find_package`**【定】 | |
+| 全文检索 | **SQLite FTS5**（先） / **Xapian**（备选） | 【待考证】见 `docs/PLAN.md` §8.2 的 D1 |
+| 向量库 | **LanceDB**（C-binding，含 ANN）【定】 | |
+| 中文分词 | **cppjieba**【定】 | |
+| 账本 / 索引 | **SQLite**【定】 | |
+| HTTP / JSON | `cpp-httplib` + `simd-json`【定】 | |
+| 推理 | **llama-server**（独立进程，OpenAI 兼容 HTTP）【定】 | 不静态链接 |
 
 **关键约束（见 `docs/ARCHITECTURE.md`）**
 
-1. 只监听 **127.0.0.1**，不作为 DSH 子进程启动。
-2. **账本与索引永不合并**；索引必须能从账本重建。
-3. 分词并集里的 **CJK 二元组是召回底线，不可移除**。
-4. Xapian 未捕获的 `Xapian::Error` 会直接 `terminate`——所有调用必须包 `try/catch`；`WritableDatabase` 非线程安全且为排他写锁，须单写者 + 加锁。
+1. 只监听 **127.0.0.1**，不作为 DSH 子进程启动。【定】
+2. 索引必须能从账本重建。【定】**「账本与索引永不合并」【待考证】**。
+3. 分词并集里的 **CJK 二元组是召回底线，不可移除**。【定】
+4. （若启用 Xapian）未捕获的 `Xapian::Error` 会直接 `terminate`——所有调用须包 `try/catch`；`WritableDatabase` 非线程安全且为排他写锁，须单写者 + 加锁。【待考证】
 
 ## 许可
 
