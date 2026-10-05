@@ -1,0 +1,29 @@
+# 构建产物
+build/
+out/
+vcpkg_installed/
+cmake-build-*/
+CMakeUserPresets.json
+
+# 目标文件
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.exe
+*.pdb
+*.ilk
+*.exp
+
+# IDE / 系统
+.vs/
+.idea/
+compile_commands.json
+Thumbs.db
+desktop.ini
+
+# 运行时数据（服务的默认数据目录，绝不入库）
+data/
