@@ -1,0 +1,23 @@
+{
+	"$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+	"name": "herodotus",
+	"version": "0.1.0",
+	"description": "Herodotus 引擎（clio）：账本 / 索引 / 记忆 / 知识 / 蒸馏 / 召回 / 人格 / 治理",
+	"builtin-baseline": "0bc1a55f422ceb190877234b3ba88c372f04c485",
+	"dependencies": [
+		{
+			"name": "sqlite3",
+			"features": [
+				"fts5"
+			]
+		},
+		"simdjson",
+		"hical61-hical",
+		{
+			"name": "boost-asio",
+			"features": [
+				"ssl"
+			]
+		}
+	]
+}

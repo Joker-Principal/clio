@@ -21,25 +21,36 @@
 
 ```
 clio\
-├─ CMakeLists.txt          （P0）
-├─ include\herodotus\      公开头；库目标名 `herodotus`【待考证】，可执行目标名 `clio`
-├─ src\
-│   ├─ ledger\             账本：SQLite，INSERT-only，事件溯源
-│   ├─ index\              索引：SQLite FTS5 + LanceDB 向量，可整体丢弃重建
-│   ├─ memory\             记忆库：per-persona、L0–L3、时效衰减
-│   ├─ knowledge\          知识库：全局共享、带出处与 char 区间、不衰减
-│   ├─ distill\            蒸馏管线：L1 抽取 / 去重合并 / L2 场景 / L3 画像
-│   ├─ recall\             混合召回：FTS + 向量 + RRF k=60 + 时效衰减 + 重排
-│   ├─ persona\            人格注册与路由
-│   ├─ governance\         治理：proposed→confirm
-│   ├─ text\               分词：cppjieba 词 ∪ 拉丁词 ∪ CJK 二元组
-│   └─ serve\              HTTP API + MCP server
-├─ daemon\main.cpp         可执行入口
-├─ prompts\                蒸馏 Prompt（移植自 dsh-layered-memory）
+├─ CMakeLists.txt              CMake 目标定义（库 `herodotus` + 可执行 `clio`）
+├─ CMakePresets.json           共享 presets（Ninja Multi-Config）
+├─ CMakeUserPresets.json       本机 presets：编译器绝对路径（gitignore）
+├─ cmake\deps.cmake            FetchContent 依赖声明
+├─ herodotus.clio.cppm         汇总模块：`import herodotus.clio;` 即得全部领域
+├─ daemon\main.cpp             可执行入口（普通 TU）
+├─ version\version.cppm        版本与协议常量
+├─ ledger\                     账本：SQLite，INSERT-only，事件溯源
+├─ index\                      索引：SQLite FTS5 + LanceDB 向量，可整体丢弃重建
+├─ memory\                     记忆库：per-persona、L0–L3、时效衰减
+├─ knowledge\                  知识库：全局共享、带出处与 char 区间、不衰减
+├─ distill\                    蒸馏管线：L1 抽取 / 去重合并 / L2 场景 / L3 画像
+├─ recall\                     混合召回：FTS + 向量 + RRF k=60 + 时效衰减 + 重排
+├─ persona\                    人格注册与路由
+├─ governance\                 治理：proposed→confirm
+├─ text\                       分词：cppjieba 词 ∪ 拉丁词 ∪ CJK 二元组
+├─ serve\                      HTTP API + MCP server
+├─ prompts\                    蒸馏 Prompt（移植自 dsh-layered-memory）
 └─ tests\
 ```
 
-> 上述目录已建好占位，**实现留待 P0 起各阶段**。
+> **模块布局约定**
+>
+> - 每个领域一个具名模块 `herodotus.clio.<domain>`；**不使用** `include/` + `src/` 的头文件布局。
+> - 模块接口单元（`.cppm`，含 `export module`）与其实现单元（`.cpp`，`module herodotus.clio.<domain>;`）**放在同一目录下并列**。
+> - 模块接口单元用 `import std;`；涉及第三方头（sqlite3 / httplib / simdjson）的实现单元改用 `module;` + `#include`——同一 TU 内标准库头与 `import std;` 不可混用。
+> - 汇总模块**不重导出 `std`**，这样普通 TU（如 `daemon/main.cpp`）仍可自由 `#include` 标准库头以取得宏（`SIGINT` 等）。
+> - `import std;` 需要 Ninja ≥ 1.11，以及 CMake 的实验性开关 `CMAKE_EXPERIMENTAL_CXX_IMPORT_STD`（UUID 与 CMake 版本绑定）。该开关与编译器路径同属机器相关配置，一并放在 `CMakeUserPresets.json` 的 `local` preset 里（不入库）。
+
+> 目录随各阶段实现逐步建立；**当前 P0 只落地 `version` / `ledger` / `serve` 三个模块与 `daemon`**。
 
 ## 规划中的技术栈
 
@@ -51,7 +62,7 @@ clio\
 | 向量库 | **LanceDB**（C-binding，含 ANN）【定】 | |
 | 中文分词 | **cppjieba**【定】 | |
 | 账本 / 索引 | **SQLite**【定】 | |
-| HTTP / JSON | `cpp-httplib` + `simd-json`【定】 | |
+| HTTP / JSON | `cpp-httplib` + `simdjson`（C++，Apache-2.0）【定】 | |
 | 推理 | **llama-server**（独立进程，OpenAI 兼容 HTTP）【定】 | 不静态链接 |
 
 **关键约束（见 `docs/ARCHITECTURE.md`）**
