@@ -69,14 +69,16 @@ bool parseArgs(int argc, char** argv, Options& out)
 
 int main(int argc, char** argv)
 {
+	using namespace herodotus::clio;
+	
 	Options options;
 	if(!parseArgs(argc, argv, options)) { return EXIT_FAILURE; }
 
 	std::println(
-		"[clio] Herodotus 引擎 v{} (protocol {})", herodotus::clio::kVersion, herodotus::clio::kProtocolVersion
+		"[clio] Herodotus 引擎 v{} (protocol {})", kVersion, kProtocolVersion
 	);
 
-	const herodotus::clio::ledger::LedgerStatus ledger = herodotus::clio::ledger::probe(options.dataDir);
+	const auto ledger = ledger::probe(options.dataDir);
 	std::println("[clio] sqlite {} (FTS5 {})", ledger.sqliteVersion, ledger.fts5 ? "on" : "off");
 	if(!ledger.ok)
 	{
@@ -90,8 +92,8 @@ int main(int argc, char** argv)
 	}
 	std::println("[clio] 账本可用: {}", ledger.dbPath);
 
-	herodotus::clio::serve::HttpServer server{
-		herodotus::clio::serve::ServerOptions{.host = options.host, .port = options.port, .dataDir = options.dataDir}
+	serve::HttpServer server{
+		serve::ServerOptions{.host = options.host, .port = options.port, .dataDir = options.dataDir}
 	};
 
 	std::println("[clio] 已监听 http://{}:{}（Ctrl+C 退出）", options.host, options.port);

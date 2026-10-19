@@ -46,7 +46,7 @@ clio\
 >
 > - 每个领域一个具名模块 `herodotus.clio.<domain>`；**不使用** `include/` + `src/` 的头文件布局。
 > - 模块接口单元（`.cppm`，含 `export module`）与其实现单元（`.cpp`，`module herodotus.clio.<domain>;`）**放在同一目录下并列**。
-> - 模块接口单元用 `import std;`；涉及第三方头（sqlite3 / httplib / simdjson）的实现单元改用 `module;` + `#include`——同一 TU 内标准库头与 `import std;` 不可混用。
+> - 模块接口单元用 `import std;`；涉及第三方头（sqlite3 / asio / simdjson）的实现单元改用 `module;` + `#include`——同一 TU 内标准库头与 `import std;` 不可混用。
 > - 汇总模块**不重导出 `std`**，这样普通 TU（如 `daemon/main.cpp`）仍可自由 `#include` 标准库头以取得宏（`SIGINT` 等）。
 > - `import std;` 需要 Ninja ≥ 1.11，以及 CMake 的实验性开关 `CMAKE_EXPERIMENTAL_CXX_IMPORT_STD`（UUID 与 CMake 版本绑定）。该开关与编译器路径同属机器相关配置，一并放在 `CMakeUserPresets.json` 的 `local` preset 里（不入库）。
 
@@ -62,7 +62,8 @@ clio\
 | 向量库 | **LanceDB**（C-binding，含 ANN）【定】 | |
 | 中文分词 | **cppjieba**【定】 | |
 | 账本 / 索引 | **SQLite**【定】 | |
-| HTTP / JSON | `cpp-httplib` + `simdjson`（C++，Apache-2.0）【定】 | |
+| HTTP | **pylai**【定】 | 自建 asio HTTP 底座（取代 hical / cpp-httplib 候选） |
+| JSON | **simdjson**【定】 | |
 | 推理 | **llama-server**（独立进程，OpenAI 兼容 HTTP）【定】 | 不静态链接 |
 
 **关键约束（见 `docs/ARCHITECTURE.md`）**

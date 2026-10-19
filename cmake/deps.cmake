@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 # 第三方依赖
 #
-#   vcpkg 供货：unofficial-sqlite3（features: fts5）/ simdjson / pylai（取代 hical）
+#   vcpkg 供货：unofficial-sqlite3（features: fts5）/ simdjson / pylai
 #   pylai 与它的 jk / asio 来自 joker-registry（见 vcpkg-configuration.json）
 #   仅 cppjieba 走 FetchContent —— vcpkg 官方 registry 无该端口
 #
