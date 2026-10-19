@@ -1,7 +1,8 @@
 # ---------------------------------------------------------------------------
 # 第三方依赖
 #
-#   vcpkg 供货：unofficial-sqlite3（features: fts5）/ simdjson / hical（取代 cpp-httplib）
+#   vcpkg 供货：unofficial-sqlite3（features: fts5）/ simdjson / pylai（取代 hical）
+#   pylai 与它的 jk / asio 来自 joker-registry（见 vcpkg-configuration.json）
 #   仅 cppjieba 走 FetchContent —— vcpkg 官方 registry 无该端口
 #
 # 需通过 CMAKE_TOOLCHAIN_FILE 接入 vcpkg（机器相关，见 CMakeUserPresets.json）。
@@ -18,8 +19,10 @@ endif()
 # --- simdjson（vcpkg）------------------------------------------------------
 find_package(simdjson CONFIG REQUIRED)
 
-# --- hical（vcpkg）—— HTTP 服务底座，取代 cpp-httplib ----------------------
-find_package(hical CONFIG REQUIRED)
+# --- pylai（joker-registry）—— HTTP 服务底座，取代 hical ------------------
+# C++ 模块的 BMI 由本项目自己生成（端口只供货源码 + IFC）；它的依赖链
+# （asio / jk / Boost / llhttp / fmt / spdlog）由端口自己的 find_dependency 带来。
+find_package(pylai CONFIG REQUIRED)
 
 # --- cppjieba（FetchContent）-----------------------------------------------
 include(FetchContent)

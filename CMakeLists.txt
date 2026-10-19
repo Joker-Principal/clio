@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
+
 project(herodotus
     VERSION 0.1.0
     DESCRIPTION "Herodotus 引擎：账本 / 索引 / 记忆 / 知识 / 蒸馏 / 召回 / 人格 / 治理"
@@ -29,16 +30,13 @@ target_sources(herodotus
         ${HERODOTUS_SOURCES}
 )
 add_library(herodotus::herodotus ALIAS herodotus)
-target_compile_definitions(herodotus
-    PRIVATE HERODOTUS_VERSION="${PROJECT_VERSION}"
-    PUBLIC
-        "$<$<PLATFORM_ID:Windows>:_WIN32_WINNT=0x0A00>"
-)
+target_compile_definitions(herodotus PRIVATE HERODOTUS_VERSION="${PROJECT_VERSION}")
 target_link_libraries(herodotus
     PUBLIC 
         SQLite::SQLite3
-        hical::hical_core
         simdjson::simdjson
+    PRIVATE
+        pylai::pylai
 )
 target_include_directories(herodotus SYSTEM PUBLIC "${CPPJIEBA_INCLUDE_DIR}")
 target_include_directories(herodotus PUBLIC "${PROJECT_SOURCE_DIR}/core")

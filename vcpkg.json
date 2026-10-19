@@ -12,12 +12,6 @@
 			]
 		},
 		"simdjson",
-		"hical61-hical",
-		{
-			"name": "boost-asio",
-			"features": [
-				"ssl"
-			]
-		}
+		"pylai"
 	]
 }
