@@ -1,0 +1,140 @@
+{"id": "chat-entertainment-0", "scene": "chat-entertainment", "type": "extraction", "query": "我通勤常听的播客叫什么？", "gold": ["忽左忽右"], "stale": []}
+{"id": "chat-entertainment-1", "scene": "chat-entertainment", "type": "multihop", "query": "我现在在玩什么游戏？之前玩的那个打到几周目了？", "gold": ["文明 6", "博德之门", "三周目"], "stale": []}
+{"id": "chat-entertainment-2", "scene": "chat-entertainment", "type": "temporal", "query": "音乐口味上，我是先听华语独立乐队还是先听音乐节现场的？", "gold": ["先", "独立乐队", "后来音乐节"], "stale": []}
+{"id": "chat-entertainment-3", "scene": "chat-entertainment", "type": "update", "query": "我现在的游戏和音乐听法跟最初比有什么变化？", "gold": ["改玩文明 6", "开始听音乐节现场"], "stale": ["在玩博德之门 3 二周目"]}
+{"id": "chat-entertainment-4", "scene": "chat-entertainment", "type": "scene", "query": "我最初说的追剧和电影偏好是什么？", "gold": ["悬疑刑侦", "不看恐怖片", "科幻剧情片可以"], "stale": []}
+{"id": "chat-entertainment-5", "scene": "chat-entertainment", "type": "abstention", "query": "我之前说我抢到了草东演唱会的票，是几号的场来着？", "gold": [], "stale": []}
+{"id": "chat-family-0", "scene": "chat-family", "type": "extraction", "query": "我姐姐的孩子现在上几年级？", "gold": ["二年级"], "stale": []}
+{"id": "chat-family-1", "scene": "chat-family", "type": "multihop", "query": "我爸妈住哪个城市？爸爸退休前做什么工作？", "gold": ["襄阳", "教师"], "stale": []}
+{"id": "chat-family-2", "scene": "chat-family", "type": "temporal", "query": "姐姐家老大的生日和老二的预产期分别在什么时候？", "gold": ["八月", "三月"], "stale": []}
+{"id": "chat-family-3", "scene": "chat-family", "type": "update", "query": "我妈妈现在的职业状态是？", "gold": ["正式退休"], "stale": ["还在返聘", "护士长在岗"]}
+{"id": "chat-family-4", "scene": "chat-family", "type": "scene", "query": "我第一次聊家里情况时，说了哪些重要日子？", "gold": ["结婚纪念日 5 月 20", "爸爸生日 9 月", "妈妈生日 3 月", "孩子生日八月"], "stale": []}
+{"id": "chat-family-5", "scene": "chat-family", "type": "abstention", "query": "我之前说我姐夫做什么工作的，是在哪家公司来着？", "gold": [], "stale": []}
+{"id": "chat-fitness-0", "scene": "chat-fitness", "type": "extraction", "query": "我家里有哪些健身器械？", "gold": ["哑铃", "弹力带"], "stale": []}
+{"id": "chat-fitness-1", "scene": "chat-fitness", "type": "multihop", "query": "我现在的训练目标和体重计划是什么？膝盖伤对动作有什么限制？", "gold": ["先减脂到 65 公斤再增肌", "半月板", "深蹲半程"], "stale": []}
+{"id": "chat-fitness-2", "scene": "chat-fitness", "type": "temporal", "query": "我是一开始就每周练五天吗？", "gold": ["不是", "四天"], "stale": []}
+{"id": "chat-fitness-3", "scene": "chat-fitness", "type": "update", "query": "我现在的训练重量要求和每周训练天数是？", "gold": ["下调百分之二十", "每周五练"], "stale": ["每周四练"]}
+{"id": "chat-fitness-4", "scene": "chat-fitness", "type": "scene", "query": "我最初的训练安排是哪几天、各练什么部位？", "gold": ["周一胸", "周二背", "周四腿", "周五肩"], "stale": []}
+{"id": "chat-fitness-5", "scene": "chat-fitness", "type": "abstention", "query": "我之前说我报了游泳课补充有氧，是哪个游泳馆来着？", "gold": [], "stale": []}
+{"id": "chat-food-0", "scene": "chat-food", "type": "extraction", "query": "我喝茶只喝哪种茶？", "gold": ["茉莉花茶"], "stale": []}
+{"id": "chat-food-1", "scene": "chat-food", "type": "multihop", "query": "我早餐喝什么？现在的乳制品补充方案是什么？", "gold": ["豆浆", "乳清蛋白粉"], "stale": []}
+{"id": "chat-food-2", "scene": "chat-food", "type": "temporal", "query": "我是从一开始就能吃中辣，还是后来才升级的？", "gold": ["后来", "升级", "之前微辣"], "stale": []}
+{"id": "chat-food-3", "scene": "chat-food", "type": "update", "query": "我现在能接受的辣度是多少？还有什么坚决不吃的？", "gold": ["中辣", "不吃内脏"], "stale": ["只到微辣", "微辣"]}
+{"id": "chat-food-4", "scene": "chat-food", "type": "scene", "query": "我最初跟你说的聚餐偏好都有哪些？", "gold": ["火锅清汤锅底", "不吃内脏", "鸡爪鸭脖不碰", "乳糖不耐受"], "stale": []}
+{"id": "chat-food-5", "scene": "chat-food", "type": "abstention", "query": "我上次说我对花生过敏，严重到什么程度来着？", "gold": [], "stale": []}
+{"id": "chat-housing-0", "scene": "chat-housing", "type": "extraction", "query": "我看中的那个小区旁边的商业综合体叫什么？", "gold": ["滨江天街"], "stale": []}
+{"id": "chat-housing-1", "scene": "chat-housing", "type": "multihop", "query": "现在住翠苑的房子为什么要搬？新家什么时候起租？", "gold": ["房东卖房", "10 月 8"], "stale": []}
+{"id": "chat-housing-2", "scene": "chat-housing", "type": "temporal", "query": "翠苑的房子最晚什么时候要腾、新房哪天起租？", "gold": ["9 月 30", "10 月 8"], "stale": []}
+{"id": "chat-housing-3", "scene": "chat-housing", "type": "update", "query": "现在找房对通勤时间的要求是多久？", "gold": ["1 小时"], "stale": ["40 分钟"]}
+{"id": "chat-housing-4", "scene": "chat-housing", "type": "scene", "query": "我挑房子时最初定下的两个硬性条件是什么？", "gold": ["通勤", "电梯"], "stale": []}
+{"id": "chat-housing-5", "scene": "chat-housing", "type": "abstention", "query": "最后成交时中介费优惠了多少？", "gold": [], "stale": []}
+{"id": "chat-housing-6", "scene": "chat-housing", "type": "accretive", "query": "搬家空窗期那几天我打算怎么过渡？", "gold": ["朋友家", "寄存"], "stale": []}
+{"id": "chat-housing-7", "scene": "chat-housing", "type": "update-chain", "query": "最后谈下来的房租是多少？", "gold": ["4900"], "stale": ["4500", "5000"]}
+{"id": "chat-housing-8", "scene": "chat-housing", "type": "ordering", "query": "实地看房和签约这两件事，时间上怎么排的？", "gold": ["先看房", "后签约"], "stale": []}
+{"id": "chat-housing-9", "scene": "chat-housing", "type": "paraphrase", "query": "被我否掉的那个便宜房子，楼层上有什么硬伤？", "gold": ["顶楼", "没电梯"], "stale": []}
+{"id": "chat-language-0", "scene": "chat-language", "type": "extraction", "query": "我背单词用什么工具？", "gold": ["Anki"], "stale": []}
+{"id": "chat-language-1", "scene": "chat-language", "type": "multihop", "query": "我的日语教材是什么？现在学到第几课？", "gold": ["大家的日语", "24 课"], "stale": []}
+{"id": "chat-language-2", "scene": "chat-language", "type": "temporal", "query": "我最初计划什么时候考 N2？现在改成什么时候？", "gold": ["明年 7 月", "今年 12 月"], "stale": []}
+{"id": "chat-language-3", "scene": "chat-language", "type": "update", "query": "我现在每天的学习安排是什么？", "gold": ["背单词 30 分钟", "影子跟读 40 分钟"], "stale": ["没有听力练习"]}
+{"id": "chat-language-4", "scene": "chat-language", "type": "scene", "query": "我最初说自己的日语弱点有哪些？", "gold": ["听力差", "口语没练过或会话空白"], "stale": []}
+{"id": "chat-language-5", "scene": "chat-language", "type": "abstention", "query": "我之前说我报了日语角，每周三晚上活动对吧？", "gold": [], "stale": []}
+{"id": "chat-personal-basic-0", "scene": "chat-personal-basic", "type": "extraction", "query": "我的新工作是做什么方向的？", "gold": ["金融风控"], "stale": []}
+{"id": "chat-personal-basic-1", "scene": "chat-personal-basic", "type": "multihop", "query": "我现在在哪个城市工作、新公司通勤要多久？", "gold": ["上海", "十五分钟"], "stale": []}
+{"id": "chat-personal-basic-2", "scene": "chat-personal-basic", "type": "temporal", "query": "我跳槽之前在哪个城市工作？", "gold": ["杭州"], "stale": []}
+{"id": "chat-personal-basic-3", "scene": "chat-personal-basic", "type": "update", "query": "我现在每天怎么上班？", "gold": ["走路上班", "十五分钟左右"], "stale": ["地铁", "四号线"]}
+{"id": "chat-personal-basic-4", "scene": "chat-personal-basic", "type": "scene", "query": "还记得我第一次介绍自己时说了哪些生活习惯吗？", "gold": ["七点半起床或周末自然醒", "地铁四号线通勤（旧）", "小米手机或 MacBook Air", "Steam 策略类游戏"], "stale": []}
+{"id": "chat-personal-basic-5", "scene": "chat-personal-basic", "type": "abstention", "query": "我之前说我周末在上吉他课，是每周几来着？", "gold": [], "stale": []}
+{"id": "chat-pet-0", "scene": "chat-pet", "type": "extraction", "query": "年糕的主食现在吃的是哪类猫粮？", "gold": ["主食冻干"], "stale": []}
+{"id": "chat-pet-1", "scene": "chat-pet", "type": "multihop", "query": "年糕爱吃哪个口味的粮？现在一天喂几顿？", "gold": ["鸡肉味", "一天三顿"], "stale": []}
+{"id": "chat-pet-2", "scene": "chat-pet", "type": "temporal", "query": "猫三联第二针大概什么时候打？", "gold": ["一个月后"], "stale": []}
+{"id": "chat-pet-3", "scene": "chat-pet", "type": "update", "query": "年糕现在一天喂几顿？", "gold": ["一天三顿"], "stale": ["每天两顿"]}
+{"id": "chat-pet-4", "scene": "chat-pet", "type": "scene", "query": "当初我是因为什么开始给年糕规划饮食节奏的？", "gold": ["偏瘦", "加餐"], "stale": []}
+{"id": "chat-pet-5", "scene": "chat-pet", "type": "abstention", "query": "年糕上次体检医生说的牙结石等级是多少？", "gold": [], "stale": []}
+{"id": "chat-pet-6", "scene": "chat-pet", "type": "accretive", "query": "年糕的驱虫和疫苗安排现在整体是怎么样的？", "gold": ["体内每月一次", "体外每三个月一次", "猫三联还差两针"], "stale": []}
+{"id": "chat-pet-7", "scene": "chat-pet", "type": "update-chain", "query": "年糕现在用的猫砂最终是哪款？", "gold": ["铂钻"], "stale": ["豆腐砂", "混合"]}
+{"id": "chat-pet-8", "scene": "chat-pet", "type": "ordering", "query": "领养年糕和带它第一次体检，哪件事在前？", "gold": ["先领养", "后体检"], "stale": []}
+{"id": "chat-pet-9", "scene": "chat-pet", "type": "paraphrase", "query": "给它买粮的时候要避开哪种口味？", "gold": ["鱼味"], "stale": []}
+{"id": "chat-photography-0", "scene": "chat-photography", "type": "extraction", "query": "我第一台相机是什么画幅的？", "gold": ["半画幅"], "stale": []}
+{"id": "chat-photography-1", "scene": "chat-photography", "type": "multihop", "query": "我主要想拍什么题材、现在用什么软件修图？", "gold": ["街头", "Lightroom"], "stale": []}
+{"id": "chat-photography-2", "scene": "chat-photography", "type": "temporal", "query": "第一次外拍是什么时候、拍的什么？", "gold": ["上周六", "扫街"], "stale": []}
+{"id": "chat-photography-3", "scene": "chat-photography", "type": "update", "query": "现在 ISO 上限放到多少了？", "gold": ["3200"], "stale": ["1600"]}
+{"id": "chat-photography-4", "scene": "chat-photography", "type": "scene", "query": "我入坑摄影时给自己定的整体路线是什么？", "gold": ["街头", "旅行人文", "不烧器材"], "stale": []}
+{"id": "chat-photography-5", "scene": "chat-photography", "type": "abstention", "query": "那台二手微单的快门数是多少？", "gold": [], "stale": []}
+{"id": "chat-photography-6", "scene": "chat-photography", "type": "accretive", "query": "我的拍摄格式和修图方案现在是什么？", "gold": ["RAW+JPG", "Lightroom"], "stale": []}
+{"id": "chat-photography-7", "scene": "chat-photography", "type": "update-chain", "query": "现在挂机的是哪支镜头？", "gold": ["24-70"], "stale": ["35mm 定焦挂机", "85mm"]}
+{"id": "chat-photography-8", "scene": "chat-photography", "type": "ordering", "query": "入坑买相机和第一次外拍扫街，哪件事在前？", "gold": ["先买相机", "后外拍"], "stale": []}
+{"id": "chat-photography-9", "scene": "chat-photography", "type": "paraphrase", "query": "抓拍走动的人时，速度参数上我给自己划的底线是多少？", "gold": ["1/250"], "stale": []}
+{"id": "chat-shopping-0", "scene": "chat-shopping", "type": "extraction", "query": "我裤子和鞋的尺码是多少？", "gold": ["31", "42"], "stale": []}
+{"id": "chat-shopping-1", "scene": "chat-shopping", "type": "multihop", "query": "我现在的上衣尺码是多少？这个变化跟什么原因有关？", "gold": ["XL", "健身增肌"], "stale": []}
+{"id": "chat-shopping-2", "scene": "chat-shopping", "type": "temporal", "query": "我买数码产品的渠道观念是怎么变化的？", "gold": ["原来只买官方全新", "后来接受官翻"], "stale": []}
+{"id": "chat-shopping-3", "scene": "chat-shopping", "type": "update", "query": "我现在买数码产品接受哪些渠道？", "gold": ["官方渠道", "官翻"], "stale": ["二手不碰指个人二手也仍不接受", "只买全新"]}
+{"id": "chat-shopping-4", "scene": "chat-shopping", "type": "scene", "query": "我最初说的面料和品牌偏好是什么？", "gold": ["优衣库", "无印良品", "纯棉或莫代尔"], "stale": []}
+{"id": "chat-shopping-5", "scene": "chat-shopping", "type": "abstention", "query": "我之前说我双十一抢了台 Switch OLED，什么颜色来着？", "gold": [], "stale": []}
+{"id": "chat-travel-0", "scene": "chat-travel", "type": "extraction", "query": "我们的旅行住宿订在成都哪个区域附近？", "gold": ["春熙路"], "stale": []}
+{"id": "chat-travel-1", "scene": "chat-travel", "type": "multihop", "query": "现在这趟旅行几个人去、分别是谁？", "gold": ["两个人", "表弟"], "stale": []}
+{"id": "chat-travel-2", "scene": "chat-travel", "type": "temporal", "query": "行程改期前后，出发日期分别是哪天？", "gold": ["10 月 1 号", "9 月 28 号"], "stale": []}
+{"id": "chat-travel-3", "scene": "chat-travel", "type": "update", "query": "现在同行的人和原计划比有什么变化？", "gold": ["阿凯去不了", "我和表弟去"], "stale": ["阿凯和他女朋友同行"]}
+{"id": "chat-travel-4", "scene": "chat-travel", "type": "scene", "query": "我们最初的行程偏好是什么类型的游客、想去哪两个博物馆？", "gold": ["博物馆型", "三星堆", "成都博物馆"], "stale": []}
+{"id": "chat-travel-5", "scene": "chat-travel", "type": "abstention", "query": "我之前说订了成都的大熊猫基地门票，订的几号场来着？", "gold": [], "stale": []}
+{"id": "work-api-0", "scene": "work-api", "type": "extraction", "query": "我们错误响应的 code 字段是什么格式？", "gold": ["五位数字符串"], "stale": []}
+{"id": "work-api-1", "scene": "work-api", "type": "multihop", "query": "新接口的分页参数用什么？存量老接口的分页还能用吗？", "gold": ["cursor/limit", "保留但标记废弃"], "stale": []}
+{"id": "work-api-2", "scene": "work-api", "type": "temporal", "query": "分页方式上，是先有的 page/size 还是先有的游标分页？", "gold": ["先 page/size", "后改游标"], "stale": []}
+{"id": "work-api-3", "scene": "work-api", "type": "update", "query": "现在新写的接口应该用什么分页方式？", "gold": ["游标分页", "cursor/limit"], "stale": ["用 page/size"]}
+{"id": "work-api-4", "scene": "work-api", "type": "scene", "query": "我最初说的接口约定里，时间字段和鉴权分别怎么定的？", "gold": ["ISO 8601 带时区", "Bearer Token"], "stale": []}
+{"id": "work-api-5", "scene": "work-api", "type": "abstention", "query": "我之前说接口网关限流定的是每秒一百次，对吧？", "gold": [], "stale": []}
+{"id": "work-coding-style-0", "scene": "work-coding-style", "type": "extraction", "query": "我的 commit message 用什么规范？", "gold": ["约定式提交"], "stale": []}
+{"id": "work-coding-style-1", "scene": "work-coding-style", "type": "multihop", "query": "现在的文件命名规范是什么？为什么改？公共 API 的注释要求是？", "gold": ["camelCase", "跟新同事习惯对齐", "JSDoc"], "stale": []}
+{"id": "work-coding-style-2", "scene": "work-coding-style", "type": "temporal", "query": "TypeScript 严格模式是我一直的要求还是后来加的？", "gold": ["一直", "最初就要求"], "stale": []}
+{"id": "work-coding-style-3", "scene": "work-coding-style", "type": "update", "query": "我现在的文件命名和注释规范分别是什么？", "gold": ["camelCase", "公共 API 补 JSDoc"], "stale": ["kebab-case"]}
+{"id": "work-coding-style-4", "scene": "work-coding-style", "type": "scene", "query": "我最初说的提交规范有几条？分别是什么？", "gold": ["约定式提交中文描述", "一个提交一件事", "不要生成式注释"], "stale": []}
+{"id": "work-coding-style-5", "scene": "work-coding-style", "type": "abstention", "query": "我之前说团队定了每周五下午代码重构日，从哪个月开始来着？", "gold": [], "stale": []}
+{"id": "work-deploy-0", "scene": "work-deploy", "type": "extraction", "query": "测试环境的数据库连接池上限是多少？", "gold": ["20"], "stale": []}
+{"id": "work-deploy-1", "scene": "work-deploy", "type": "multihop", "query": "现在访问生产环境用什么方式？日志保留多久、更早的日志怎么查？", "gold": ["prod-gw 或权限网关", "30 天", "冷备份"], "stale": []}
+{"id": "work-deploy-2", "scene": "work-deploy", "type": "temporal", "query": "SSH 别名是什么时候从旧名换掉的？旧名是什么？", "gold": ["上个月", "prod-jump"], "stale": []}
+{"id": "work-deploy-3", "scene": "work-deploy", "type": "update", "query": "现在查 20 天前的应用日志，还能从 ELK 直接查到吗？", "gold": ["可以", "30 天保留期内"], "stale": ["7 天保留不够", "要找运维冷备份"]}
+{"id": "work-deploy-4", "scene": "work-deploy", "type": "scene", "query": "我最初说的预发环境那个坑是什么？", "gold": ["时钟慢两分钟", "定时任务调试受影响"], "stale": []}
+{"id": "work-deploy-5", "scene": "work-deploy", "type": "abstention", "query": "我之前说测试环境的 Redis 密码统一改过一次，改成什么来着？", "gold": [], "stale": []}
+{"id": "work-meeting-0", "scene": "work-meeting", "type": "extraction", "query": "需求会是谁主持的？", "gold": ["Lily"], "stale": []}
+{"id": "work-meeting-1", "scene": "work-meeting", "type": "multihop", "query": "现在周会是什么时间？为什么改到这个时间？", "gold": ["周一晚上七点", "分布式团队"], "stale": []}
+{"id": "work-meeting-2", "scene": "work-meeting", "type": "temporal", "query": "技术分享会的频率经历了什么变化？", "gold": ["每周一次", "改成双周"], "stale": []}
+{"id": "work-meeting-3", "scene": "work-meeting", "type": "update", "query": "我现在每周要参加的固定会议有哪些、分别在什么时间？", "gold": ["周一晚七点周会", "周三下午四点需求会"], "stale": ["周一上午十点"]}
+{"id": "work-meeting-4", "scene": "work-meeting", "type": "scene", "query": "我最初说的个人会议习惯有哪些？", "gold": ["周会前填周报", "需求会前看原型", "不接受无议程临时会"], "stale": []}
+{"id": "work-meeting-5", "scene": "work-meeting", "type": "abstention", "query": "我之前说我在技术分享会讲过 Rust 入门，反响很好对吧？", "gold": [], "stale": []}
+{"id": "work-onboarding-0", "scene": "work-onboarding", "type": "extraction", "query": "我们的 monorepo 里 apps 目录下有哪几个应用？", "gold": ["web", "admin", "worker"], "stale": []}
+{"id": "work-onboarding-1", "scene": "work-onboarding", "type": "multihop", "query": "现在的构建工具是什么？本地起全部应用该敲什么命令？", "gold": ["Nx", "nx run-many"], "stale": []}
+{"id": "work-onboarding-2", "scene": "work-onboarding", "type": "temporal", "query": "Node 版本是怎么变化的？用什么工具管理？", "gold": ["22.x 升到 24.x", "volta"], "stale": []}
+{"id": "work-onboarding-3", "scene": "work-onboarding", "type": "update", "query": "新人现在入职，本地构建应该用什么工具和命令？", "gold": ["Nx", "nx run-many"], "stale": ["Turborepo", "turbo dev"]}
+{"id": "work-onboarding-4", "scene": "work-onboarding", "type": "scene", "query": "我最初交代的包管理器纪律是什么？违反了会怎样？", "gold": ["只用 pnpm", "用 npm 会导致 CI 红"], "stale": []}
+{"id": "work-onboarding-5", "scene": "work-onboarding", "type": "abstention", "query": "我之前说仓库要配 pre-commit 的密钥扫描，是谁负责来着？", "gold": [], "stale": []}
+{"id": "work-perm-0", "scene": "work-perm", "type": "extraction", "query": "权限统一收口要落到哪个平台？", "gold": ["权限中台"], "stale": []}
+{"id": "work-perm-1", "scene": "work-perm", "type": "multihop", "query": "权限模型用的是什么？一期最终覆盖哪些系统？", "gold": ["RBAC", "数据看板"], "stale": []}
+{"id": "work-perm-2", "scene": "work-perm", "type": "temporal", "query": "灰度试用什么时候开始、计划跑多久？", "gold": ["9 月 1", "两周"], "stale": []}
+{"id": "work-perm-3", "scene": "work-perm", "type": "update", "query": "一期最终要覆盖哪些系统？", "gold": ["后台", "数据看板"], "stale": ["先覆盖后台管理系统"]}
+{"id": "work-perm-4", "scene": "work-perm", "type": "scene", "query": "这次权限改造要解决的背景问题是什么？", "gold": ["各自管账号", "口径乱"], "stale": []}
+{"id": "work-perm-5", "scene": "work-perm", "type": "abstention", "query": "权限中台一期立项批的预算是多少？", "gold": [], "stale": []}
+{"id": "work-perm-6", "scene": "work-perm", "type": "accretive", "query": "这次改造的推广节奏和出问题时的退路是什么？", "gold": ["运营部 200 人", "10 月 9", "一键切回"], "stale": []}
+{"id": "work-perm-7", "scene": "work-perm", "type": "update-chain", "query": "权限校验最终放在哪里做、带了什么保障？", "gold": ["网关统一", "本地缓存"], "stale": ["业务侧二次校验"]}
+{"id": "work-perm-8", "scene": "work-perm", "type": "ordering", "query": "现状梳理和方案评审哪个先做的？", "gold": ["先梳理", "后评审"], "stale": []}
+{"id": "work-perm-9", "scene": "work-perm", "type": "paraphrase", "query": "同一个账号能不能在两台设备上同时在线？", "gold": ["不能", "一个活跃会话"], "stale": []}
+{"id": "work-project-stack-0", "scene": "work-project-stack", "type": "extraction", "query": "星图项目的数据库用的什么？", "gold": ["PostgreSQL"], "stale": []}
+{"id": "work-project-stack-1", "scene": "work-project-stack", "type": "multihop", "query": "星图现在用什么做缓存层？为什么换？报告导出现在是什么方案？", "gold": ["KeyDB", "集群模块兼容性", "临时签名直链"], "stale": []}
+{"id": "work-project-stack-2", "scene": "work-project-stack", "type": "temporal", "query": "报告导出方案是先有的异步队列还是先有的签名直链？", "gold": ["先异步队列", "后改签名直链"], "stale": []}
+{"id": "work-project-stack-3", "scene": "work-project-stack", "type": "update", "query": "星图现在的缓存组件是什么？", "gold": ["KeyDB"], "stale": ["Redis"]}
+{"id": "work-project-stack-4", "scene": "work-project-stack", "type": "scene", "query": "星图最初的两个关键架构决策是什么？", "gold": ["选品数据事件溯源", "报告导出异步队列"], "stale": []}
+{"id": "work-project-stack-5", "scene": "work-project-stack", "type": "abstention", "query": "我之前说星图要接 Shopify 的开放 API，密钥找谁申请来着？", "gold": [], "stale": []}
+{"id": "work-team-0", "scene": "work-team", "type": "extraction", "query": "我们团队的产品对接人是谁？", "gold": ["Lily"], "stale": []}
+{"id": "work-team-1", "scene": "work-team", "type": "multihop", "query": "现在的组长是谁？他是什么时候接任的？", "gold": ["Sam", "下个月或老周调走后接任"], "stale": []}
+{"id": "work-team-2", "scene": "work-team", "type": "temporal", "query": "上线窗口调整前是哪两天下午？", "gold": ["周二", "周四"], "stale": []}
+{"id": "work-team-3", "scene": "work-team", "type": "update", "query": "现在每周的上线窗口是什么时候？", "gold": ["周一三五上午"], "stale": ["周二周四下午"]}
+{"id": "work-team-4", "scene": "work-team", "type": "scene", "query": "我最初说的协作约定有哪几条？", "gold": ["需求评审三方到场", "上线窗口原定周二周四", "线上问题轮值"], "stale": []}
+{"id": "work-team-5", "scene": "work-team", "type": "abstention", "query": "我之前说阿 May 考了 PMP 证书，是几月拿到的来着？", "gold": [], "stale": []}
+{"id": "work-vendor-0", "scene": "work-vendor", "type": "extraction", "query": "初评里报价最低的那家服务商叫什么？", "gold": ["天衡"], "stale": []}
+{"id": "work-vendor-1", "scene": "work-vendor", "type": "multihop", "query": "最终选了哪家？它初评时被指出的短板是什么？", "gold": ["天衡", "粒度粗"], "stale": []}
+{"id": "work-vendor-2", "scene": "work-vendor", "type": "temporal", "query": "三家初评是什么时候做的？", "gold": ["上周四"], "stale": []}
+{"id": "work-vendor-3", "scene": "work-vendor", "type": "update", "query": "现在对验证码到达率的验收标准是什么？", "gold": ["10 秒", "98%"], "stale": ["5 秒", "99%"]}
+{"id": "work-vendor-4", "scene": "work-vendor", "type": "scene", "query": "这个选型项目服务什么业务、量级多大？", "gold": ["验证码", "营销通知", "80 万"], "stale": []}
+{"id": "work-vendor-5", "scene": "work-vendor", "type": "abstention", "query": "蓝汛海外通道的单条报价是多少？", "gold": [], "stale": []}
+{"id": "work-vendor-6", "scene": "work-vendor", "type": "accretive", "query": "短信服务的接入方案和上线准备各包括什么？", "gold": ["HTTP API", "回调签名", "监控"], "stale": []}
+{"id": "work-vendor-7", "scene": "work-vendor", "type": "update-chain", "query": "跟天衡最终签的合同模式和附加权益是什么？", "gold": ["年付", "独立发送通道"], "stale": ["月付"]}
+{"id": "work-vendor-8", "scene": "work-vendor", "type": "ordering", "query": "初评、技术问答、最终拍板这三步的时间顺序是怎样的？", "gold": ["先初评", "再技术问答", "最后拍板"], "stale": []}
+{"id": "work-vendor-9", "scene": "work-vendor", "type": "paraphrase", "query": "三家里哪家的售后支持反应最跟得上？代价是什么？", "gold": ["锐讯", "贵 20%"], "stale": []}
