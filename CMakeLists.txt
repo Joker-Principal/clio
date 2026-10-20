@@ -42,4 +42,10 @@ target_include_directories(herodotus SYSTEM PUBLIC "${CPPJIEBA_INCLUDE_DIR}")
 target_include_directories(herodotus PUBLIC "${PROJECT_SOURCE_DIR}/core")
 
 add_executable(clio daemon/main.cpp)
-target_link_libraries(clio PRIVATE herodotus)
+target_link_libraries(clio PRIVATE herodotus argparse::argparse)
+
+# P0 分词 spike：独立小工具，只借 cppjieba 头文件（不链引擎库）
+add_executable(tokenize_spike tools/tokenize_spike.cpp)
+target_link_libraries(tokenize_spike PRIVATE argparse::argparse)
+target_include_directories(tokenize_spike SYSTEM PRIVATE "${CPPJIEBA_INCLUDE_DIR}")
+target_compile_definitions(tokenize_spike PRIVATE HERODOTUS_VERSION="${PROJECT_VERSION}")

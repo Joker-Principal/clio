@@ -1,7 +1,7 @@
 build*/
 out/
 CMakeUserPresets.json
-data/
+/data/
 
 .vs/
 .idea/

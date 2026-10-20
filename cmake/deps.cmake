@@ -43,3 +43,11 @@ FetchContent_Declare(cppjieba
     SOURCE_SUBDIR  "include")
 FetchContent_MakeAvailable(cppjieba)
 set(CPPJIEBA_INCLUDE_DIR "${cppjieba_SOURCE_DIR}/include" "${cppjieba_SOURCE_DIR}/deps/limonp/include")
+
+# --- argparse（FetchContent）------------------------------------------------
+# 命令行解析，header-only。所有可执行入口统一用它，不再手写 argv 循环。
+FetchContent_Declare(argparse
+    GIT_REPOSITORY "https://github.com/p-ranav/argparse.git"
+    GIT_TAG        "v3.2"
+    GIT_SHALLOW    TRUE)
+FetchContent_MakeAvailable(argparse)

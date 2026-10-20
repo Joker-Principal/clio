@@ -13,11 +13,12 @@ module;
 module herodotus.clio.serve;
 
 import pylai;
-
 import herodotus.clio.version;
 
 namespace herodotus::clio::serve {
 namespace {
+
+using namespace pylai::route;
 
 /// P0 的 /health 体：字段固定、无需转义 ⇒ 直接格式化。
 /// P4 引入正式序列化后替换（账本 / 索引的写出口届时统一）。
@@ -36,7 +37,7 @@ std::string healthBody()
 /// 路由表：成员函数指针就是声明，动词与 pattern 由第一个形参给出（编译期校验）。
 struct Routes
 {
-	asio::awaitable<void> health(pylai::route::Get<"/health">, pylai::route::StringResponse& res)
+	asio::awaitable<void> health(Get<"/health">, StringResponse& res)
 	{
 		co_await res.content_type("application/json").body(healthBody()).flush();
 	}
@@ -49,9 +50,10 @@ struct HttpServer::Impl
 	explicit Impl(ServerOptions opts) :
 		options(std::move(opts)),
 		server(pylai::Server::builder()
-		           .bind(options.host, static_cast<std::uint16_t>(options.port))
-		           .route_on(&routes, &Routes::health)
-		           .build())
+			.bind(options.host, static_cast<std::uint16_t>(options.port))
+			.route_on(&routes, &Routes::health)
+			.build()
+		)
 	{}
 
 	ServerOptions options;
