@@ -1,0 +1,75 @@
+[
+  {
+    "name": "架构决策 + 指令 + 噪声",
+    "mode": "auto",
+    "messages": [
+      { "id": "m1", "role": "user", "timestamp": 1767225600000, "content": "我们把多媒体的处理后置到 P4，先把人格系统做完。" },
+      { "id": "m2", "role": "assistant", "timestamp": 1767225601000, "content": "好的，已记录。" },
+      { "id": "m3", "role": "user", "timestamp": 1767225602000, "content": "记住，以后回答我时先给结论，再给理由。" },
+      { "id": "m4", "role": "user", "timestamp": 1767225603000, "content": "嗯，今天天气不错。" },
+      { "id": "m5", "role": "user", "timestamp": 1767225604000, "content": "这次帮我查一下这个函数。" },
+      { "id": "m6", "role": "user", "timestamp": 1767225605000, "content": "我住在杭州，平时用 C++ 写客户端。" }
+    ],
+    "expect": [
+      { "key": "media_p4", "type": "episodic", "must_contain": ["多媒体", "P4"] },
+      { "key": "answer_style", "type": "instruction", "must_contain": ["结论", "理由"] },
+      { "key": "live_hangzhou", "type": "persona", "must_contain": ["杭州"] },
+      { "key": "cpp_client", "type": "persona", "must_contain": ["C++"] }
+    ],
+    "forbid": [
+      { "desc": "天气闲聊", "must_contain": ["天气"] },
+      { "desc": "一次性操作", "must_contain": ["查一下"] },
+      { "desc": "AI 应答", "must_contain": ["已记录"] }
+    ]
+  },
+  {
+    "name": "多情境切换",
+    "mode": "auto",
+    "messages": [
+      { "id": "n1", "role": "user", "timestamp": 1767225600000, "content": "这个项目数据库就用 SQLite 吧，单写者够用了。" },
+      { "id": "n2", "role": "assistant", "timestamp": 1767225601000, "content": "明白，SQLite 作为账本存储。" },
+      { "id": "n3", "role": "user", "timestamp": 1767225602000, "content": "对了，我喝咖啡从来不加糖。" },
+      { "id": "n4", "role": "user", "timestamp": 1767225603000, "content": "下周我要去北京出差三天。" }
+    ],
+    "expect": [
+      { "key": "db_sqlite", "type": "episodic", "must_contain": ["SQLite"] },
+      { "key": "coffee", "type": "persona", "must_contain": ["咖啡"] },
+      { "key": "beijing_trip", "type": "episodic", "must_contain": ["北京"] }
+    ],
+    "forbid": [
+      { "desc": "AI 应答", "must_contain": ["明白，SQLite"] }
+    ],
+    "min_scenes": 2
+  },
+  {
+    "name": "强关联合并",
+    "mode": "chat",
+    "messages": [
+      { "id": "k1", "role": "user", "timestamp": 1767225600000, "content": "我最近在减肥。" },
+      { "id": "k2", "role": "user", "timestamp": 1767225601000, "content": "不吃晚饭，只吃沙拉。" },
+      { "id": "k3", "role": "user", "timestamp": 1767225602000, "content": "已经坚持两周了。" }
+    ],
+    "expect": [
+      { "key": "diet", "type": "persona", "must_contain": ["减肥"] }
+    ],
+    "forbid": [],
+    "max_matched": 1
+  },
+  {
+    "name": "纯噪声",
+    "mode": "chat",
+    "messages": [
+      { "id": "z1", "role": "user", "timestamp": 1767225600000, "content": "你好呀！" },
+      { "id": "z2", "role": "user", "timestamp": 1767225601000, "content": "今天好累。" },
+      { "id": "z3", "role": "user", "timestamp": 1767225602000, "content": "帮我把这段翻译成英文。" },
+      { "id": "z4", "role": "assistant", "timestamp": 1767225603000, "content": "好的，翻译如下：The quick brown fox..." }
+    ],
+    "expect": [],
+    "forbid": [
+      { "desc": "问候", "must_contain": ["你好"] },
+      { "desc": "情绪", "must_contain": ["累"] },
+      { "desc": "一次性翻译", "must_contain": ["翻译"] }
+    ],
+    "max_total": 0
+  }
+]

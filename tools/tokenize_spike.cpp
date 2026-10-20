@@ -14,25 +14,24 @@
 #include <vector>
 
 namespace {
-using Cp = char32_t;
-
-bool isCjk(Cp c)
+    
+bool isCjk(char32_t c)
 {
 	return (c >= 0x4E00 && c <= 0x9FFF) || (c >= 0x3400 && c <= 0x4DBF);
 }
-bool isLatin(Cp c)
+bool isLatin(char32_t c)
 {
 	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_' || c == '-' ||
 	       c == '.';
 }
 
-std::vector<Cp> decodeUtf8(std::string_view s)
+std::vector<char32_t> decodeUtf8(std::string_view s)
 {
-	std::vector<Cp> out;
+	std::vector<char32_t> out;
 	for(std::size_t i = 0; i < s.size();)
 	{
 		const unsigned char b = static_cast<unsigned char>(s[i]);
-		Cp cp = 0;
+		char32_t cp = 0;
 		int len = 0;
 		if((b & 0x80u) == 0) { cp = b; len = 1; }
 		else if((b & 0xE0u) == 0xC0) { cp = b & 0x1Fu; len = 2; }
@@ -49,7 +48,7 @@ std::vector<Cp> decodeUtf8(std::string_view s)
 	return out;
 }
 
-std::string encodeUtf8(Cp cp)
+std::string encodeUtf8(char32_t cp)
 {
 	std::string out;
 	if(cp < 0x80) out.push_back(static_cast<char>(cp));
@@ -74,7 +73,7 @@ std::string encodeUtf8(Cp cp)
 	return out;
 }
 
-std::string slice(const std::vector<Cp>& cps, std::size_t begin, std::size_t end)
+std::string slice(const std::vector<char32_t>& cps, std::size_t begin, std::size_t end)
 {
 	std::string out;
 	for(std::size_t i = begin; i < end; ++i) { out += encodeUtf8(cps[i]); }
@@ -87,10 +86,10 @@ bool meaningfulJiebaWord(std::string_view w)
 	const auto cps = decodeUtf8(w);
 	if(cps.size() == 1)
 	{
-		const Cp c = cps.front();
+		const char32_t c = cps.front();
 		return isCjk(c) || isLatin(c); // 单字符标点 / 空白不算词
 	}
-	for(const Cp c : cps)
+	for(const char32_t c : cps)
 	{
 		if(isCjk(c) || isLatin(c)) return true;
 	}
