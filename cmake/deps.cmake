@@ -19,10 +19,16 @@ endif()
 # --- simdjson（vcpkg）------------------------------------------------------
 find_package(simdjson CONFIG REQUIRED)
 
+# --- simdutf（vcpkg）—— UTF-8 校验与 UTF-32 转换 ---------------------------
+find_package(simdutf CONFIG REQUIRED)
+
 # --- pylai（joker-registry）—— HTTP 服务底座，取代 hical ------------------
 # C++ 模块的 BMI 由本项目自己生成（端口只供货源码 + IFC）；它的依赖链
 # （asio / jk / Boost / llhttp / fmt / spdlog）由端口自己的 find_dependency 带来。
 find_package(pylai CONFIG REQUIRED)
+
+# --- jk（joker-registry）—— SQLite / 日志封装 ------------------------------
+find_package(jk CONFIG REQUIRED)
 
 # --- cppjieba（FetchContent）-----------------------------------------------
 include(FetchContent)

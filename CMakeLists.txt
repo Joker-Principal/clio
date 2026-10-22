@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 
 project(herodotus
-    VERSION 0.1.0
+    VERSION 0.2.0
     DESCRIPTION "Herodotus 引擎：账本 / 索引 / 记忆 / 知识 / 蒸馏 / 召回 / 人格 / 治理"
     LANGUAGES C CXX
 )
@@ -11,7 +11,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# 单配置生成器兜底；多配置（Ninja Multi-Config）用 CMAKE_DEFAULT_BUILD_TYPE
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+
 if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "构建类型（单配置生成器）" FORCE)
 endif()
@@ -35,8 +36,10 @@ target_link_libraries(herodotus
     PUBLIC 
         SQLite::SQLite3
         simdjson::simdjson
+        joker::module
     PRIVATE
         pylai::pylai
+        simdutf::simdutf
 )
 target_include_directories(herodotus SYSTEM PUBLIC "${CPPJIEBA_INCLUDE_DIR}")
 target_include_directories(herodotus PUBLIC "${PROJECT_SOURCE_DIR}/core")
@@ -44,8 +47,9 @@ target_include_directories(herodotus PUBLIC "${PROJECT_SOURCE_DIR}/core")
 add_executable(clio daemon/main.cpp)
 target_link_libraries(clio PRIVATE herodotus argparse::argparse)
 
-# P0 分词 spike：独立小工具，只借 cppjieba 头文件（不链引擎库）
-add_executable(tokenize_spike tools/tokenize_spike.cpp)
-target_link_libraries(tokenize_spike PRIVATE argparse::argparse)
-target_include_directories(tokenize_spike SYSTEM PRIVATE "${CPPJIEBA_INCLUDE_DIR}")
-target_compile_definitions(tokenize_spike PRIVATE HERODOTUS_VERSION="${PROJECT_VERSION}")
+add_subdirectory(tools)
+
+include(CTest)
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()

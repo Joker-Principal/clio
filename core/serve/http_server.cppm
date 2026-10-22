@@ -1,9 +1,12 @@
 module;
 
-#include <memory>
+#include <asio.hpp>
+
 #include <string>
 
 export module herodotus.clio.serve;
+
+import pylai;
 
 export namespace herodotus::clio::serve {
 
@@ -21,7 +24,7 @@ class HttpServer
 {
 public:
 	explicit HttpServer(ServerOptions options);
-	~HttpServer();
+	~HttpServer() = default;
 
 	HttpServer(const HttpServer&) = delete;
 	HttpServer& operator=(const HttpServer&) = delete;
@@ -38,8 +41,15 @@ public:
 	[[nodiscard]] const ServerOptions& options() const noexcept;
 
 private:
-	struct Impl;
-	std::unique_ptr<Impl> impl_;
+	struct Routes
+	{
+		asio::awaitable<void> health(pylai::route::Get<"/health">, pylai::route::StringResponse& res);
+	};
+
+	ServerOptions options_;
+	Routes routes_; ///< 必须声明在 server_ 之前：builder 存的是 &routes_
+	pylai::Server server_;
+	bool started_{false};
 };
 
 } // namespace herodotus::clio::serve

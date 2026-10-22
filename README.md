@@ -73,6 +73,24 @@ clio\
 3. 分词并集里的 **CJK 二元组是召回底线，不可移除**。【定】
 4. （若启用 Xapian）未捕获的 `Xapian::Error` 会直接 `terminate`——所有调用须包 `try/catch`；`WritableDatabase` 非线程安全且为排他写锁，须单写者 + 加锁。【待考证】
 
+## 构建与工具链
+
+### 现在由什么构成
+
+| 环节 | 现状 |
+| --- | --- |
+| **构建** | CMake Preset 3.28+ + **Ninja Multi-Config**。C++23 + C++ 模块。 |
+| **编译器** | **MSYS2 clang64**（clang + MinGW ABI + UCRT + libc++）。 |
+| **依赖** | **vcpkg manifest 模式**：`vcpkg.json` 只写依赖与 feature，`cmake/deps.cmake` 只写 `find_package`。第三方库不走 `FetchContent`（仅 cppjieba、argparse 例外）。 |
+| **私有端口** | **`joker-registry`**（git registry）提供 `pylai` / `jk` / `asio` 三个端口。 |
+
+### 目前(2026-10-22)的工具链的局限性
+
+1. MSVC: `pylai` 使用了模块并且 export 的接口涉及 asio::io_context，目前它无法正确导出
+
+2. clang-cl: 项目采用嵌套异常链作为追踪错误调用栈的手段，但 clang-cl 在嵌套多层后会出现无限递归。详见
+   [llvm/llvm-project#191462](https://github.com/llvm/llvm-project/issues/191462)。
+
 ## 许可
 
 **GPL-3.0**。归属声明见主仓库 [`NOTICE`](../NOTICE)——本组件的分层蒸馏管线与 Prompt 移植自 `dsh-layered-memory`（MIT），治理模式借鉴 `whale-persona`（MIT）。

@@ -7,11 +7,14 @@
 	"dependencies": [
 		{
 			"name": "sqlite3",
-			"features": [
-				"fts5"
-			]
+			"features": ["fts5", "json1"]
 		},
 		"simdjson",
+		"simdutf",
+		{
+			"name": "jk",
+			"features": ["log", "sqlite"]
+		},
 		"pylai"
 	]
 }
