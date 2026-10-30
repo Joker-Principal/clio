@@ -79,6 +79,9 @@ private:
 	/// 不做事务边界；调用方负责包裹（批量重建时避免逐条提交）。
 	[[nodiscard]] Result<void> upsertNoTxn(const ledger::L1Version& version, bool& created);
 
+	/// 删除一条记录的索引行（不做事务边界）。`existed` 指示原本是否在索引中。
+	[[nodiscard]] Result<void> removeNoTxn(std::string_view personaId, std::string_view recordId, bool& existed);
+
 	/// 写入水位（不做事务边界）。
 	[[nodiscard]] Result<void> setIndexedSeqNoTxn(std::int64_t seq);
 

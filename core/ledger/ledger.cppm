@@ -21,6 +21,8 @@ enum class LedgerErrc
 	version_not_continuous,
 	integrity_failed,
 	record_not_found,
+	invalid_op,
+	forget_content_not_empty,
 	internal,
 	open_ledger_db_failed,
 	busy_timeout_failed,
@@ -72,7 +74,7 @@ struct L1Version
 	std::string timestampsJson{"{}"};
 	std::string sourceMessageIdsJson{"[]"}; ///< 只进账本，不进索引
 	std::string metadataJson{"{}"};
-	std::string op; ///< add | merge | edit | forget
+	std::string op; ///< add | merge | edit | forget（forget 为逻辑删除，内容必须为空）
 	std::int64_t createdAt{0};
 	std::int64_t updatedAt{0};
 };

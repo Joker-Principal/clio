@@ -85,6 +85,8 @@ public:
 		case LedgerErrc::version_not_continuous: return "L1 版本不连续";
 		case LedgerErrc::integrity_failed: return "账本完整性校验失败";
 		case LedgerErrc::record_not_found: return "记录不存在";
+		case LedgerErrc::invalid_op: return "非法的 op（只允许 add | merge | edit | forget）";
+		case LedgerErrc::forget_content_not_empty: return "forget 版本不能带内容";
 		case LedgerErrc::open_ledger_db_failed: return "打开账本数据库失败";
 		case LedgerErrc::busy_timeout_failed: return "设置账本 busy_timeout 失败";
 		case LedgerErrc::init_schema_failed: return "初始化账本 schema 失败";
@@ -263,6 +265,16 @@ std::expected<bool, std::error_code> Store::appendL0(const L0Entry& entry)
 
 std::expected<std::int64_t, std::error_code> Store::appendL1Version(const L1Version& version)
 {
+	// op 与「遗忘不带内容」在开事务前先验掉，不合法就不碰库。
+	if(version.op != "add" && version.op != "merge" && version.op != "edit" && version.op != "forget")
+	{
+		return std::unexpected(makeError(LedgerErrc::invalid_op));
+	}
+	if(version.op == "forget" && !version.content.empty())
+	{
+		return std::unexpected(makeError(LedgerErrc::forget_content_not_empty));
+	}
+
 	if(auto result = conn_.exec("BEGIN IMMEDIATE"); !result) { return std::unexpected(result.error()); }
 	auto rollback = Cleanup{[this] { (void)conn_.exec("ROLLBACK"); }};
 

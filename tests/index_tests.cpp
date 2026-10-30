@@ -113,6 +113,55 @@ int run(const char* dictDir)
 		"rebuildAll: 结果一致"
 	);
 
+	// 遗忘：逻辑删除。索引里不留行，重建后也不复活
+	add("p-a", "r-4", "温酒斩华雄的前情");
+
+	{
+		ledger::L1Version v;
+		v.recordId = "r-4";
+		v.personaId = "p-a";
+
+		const auto existing = store.versionsOf("p-a", "r-4");
+		check(existing.has_value(), "forget: versionsOf 成功");
+		v.version = existing ? static_cast<int>(existing->size()) : 0;
+
+		v.type = "episodic";
+		v.family = "work";
+		v.op = "forget";
+		v.createdAt = 1767225600000;
+		v.updatedAt = 1767225600000 + v.version;
+
+		auto withContent = v;
+		withContent.content = "不该有内容";
+		check(!store.appendL1Version(withContent).has_value(), "forget: 带内容被拒绝");
+
+		const auto seq = store.appendL1Version(v);
+		check(seq.has_value(), "forget: 账本追加 op=forget 版本");
+		if(seq) { v.seq = *seq; }
+
+		check(idx.upsert(v).has_value(), "forget: 索引 upsert 成功");
+	}
+
+	const auto afterForget = idx.docCount();
+	check(afterForget && *afterForget == 3, "forget: 索引里的行被移除");
+
+	auto forgotten = idx.search("p-a", "前情");
+	check(forgotten && forgotten->empty(), "forget: 遗忘后不再命中");
+
+	check(idx.rebuildAll(store).has_value(), "forget: 重建成功");
+
+	const auto afterForgetRebuild = idx.docCount();
+	check(afterForgetRebuild && *afterForgetRebuild == 3, "forget: 重建后不复活");
+
+	// 复活：再追加一个带内容的版本
+	add("p-a", "r-4", "前情已重新记起");
+
+	auto revived = idx.search("p-a", "重新记起");
+	check(
+		revived && !revived->empty() && revived->front().recordId == "r-4",
+		"forget: 追加新版本后复活"
+	);
+
 	// 删除
 	const auto removed = idx.remove("p-a", "r-1");
 	check(removed && *removed, "remove: 存在时返回 true");

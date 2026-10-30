@@ -152,6 +152,11 @@ int run(int argc, char** argv)
 	verify.add_description("账本完整性自检");
 	program.add_subparser(verify);
 
+	argparse::ArgumentParser forget{"forget"};
+	forget.add_description("逻辑删除一条记录：账本追加 op=forget 版本，并从索引移除");
+	forget.add_argument("--record").required().help("记录 id");
+	program.add_subparser(forget);
+
 	argparse::ArgumentParser stats{"stats"};
 	stats.add_description("输出账本与索引的规模");
 	program.add_subparser(stats);
@@ -160,6 +165,7 @@ int run(int argc, char** argv)
 		"示例：\n"
 		"  store_cli --dict-dir D append-l1 --record r-1 --content \"温酒斩华雄\"\n"
 		"  store_cli --dict-dir D --persona p-a search \"华雄\" \"温酒\" --limit 5\n"
+		"  store_cli --dict-dir D --persona p-a forget --record r-1\n"
 		"  store_cli --dict-dir D rebuild --incremental\n"
 		"  store_cli --dict-dir D dump --out ./dump --persona p-a\n"
 		"  store_cli --dict-dir D load --in ./dump --mode merge"
@@ -212,6 +218,36 @@ int run(int argc, char** argv)
 
 		version.seq = must(store.appendL1Version(version));
 		if(!cmd.get<bool>("--skip-index")) { (void)must(idx.upsert(version)); }
+
+		simdjson::builder::string_builder sb;
+		sb.start_object();
+		sb.append_key_value<"ok">(true);
+		sb.append_comma();
+		sb.append_key_value<"record_id">(version.recordId);
+		sb.append_comma();
+		sb.append_key_value<"version">(version.version);
+		sb.end_object();
+		std::println("{}", dumpJson(sb));
+		return 0;
+	}
+
+	if(program.is_subcommand_used("forget"))
+	{
+		auto& cmd = program.at<argparse::ArgumentParser>("forget");
+
+		herodotus::clio::ledger::L1Version version;
+		version.recordId = cmd.get<std::string>("--record");
+		version.personaId = persona;
+		version.version =
+			static_cast<int>(must(store.versionsOf(persona, version.recordId)).size());
+		version.op = "forget";
+		version.type = "episodic";
+		version.family = "chat";
+		version.createdAt = nowMs();
+		version.updatedAt = version.createdAt;
+
+		version.seq = must(store.appendL1Version(version));
+		(void)must(idx.upsert(version));
 
 		simdjson::builder::string_builder sb;
 		sb.start_object();

@@ -71,6 +71,15 @@ catch(...)
 
 Result<void> Index::upsertNoTxn(const ledger::L1Version& v, bool& created)
 {
+	created = false;
+
+	// 遗忘是逻辑删除：索引里不留这一行，「当前状态」回到「没有这条记录」。
+	if(v.op == "forget")
+	{
+		bool ignored = false;
+		return removeNoTxn(v.personaId, v.recordId, ignored);
+	}
+
 	const std::string terms = tokenizer_.indexText(v.content);
 
 	std::int64_t docId = 0;
@@ -194,45 +203,50 @@ std::expected<bool, std::error_code> Index::upsert(const ledger::L1Version& vers
 	return created;
 }
 
+Result<void> Index::removeNoTxn(std::string_view personaId, std::string_view recordId, bool& existed)
+{
+	existed = false;
+
+	std::int64_t docId = 0;
+	{
+		auto query = conn_.prepare("SELECT doc_id FROM fts_doc WHERE persona_id=? AND record_id=?");
+		if(!query) { return std::unexpected(query.error()); }
+		if(auto result = query->binds(personaId, recordId); !result) { return std::unexpected(result.error()); }
+
+		auto row = query->fetch(docId);
+		if(!row) { return std::unexpected(row.error()); }
+		existed = *row;
+	}
+
+	if(!existed) { return {}; }
+
+	{
+		auto delFts = conn_.prepare("DELETE FROM l1_fts WHERE rowid=?");
+		if(!delFts) { return std::unexpected(delFts.error()); }
+		if(auto result = delFts->binds(docId); !result) { return std::unexpected(result.error()); }
+		if(auto done = delFts->step(); !done) { return std::unexpected(done.error()); }
+	}
+	{
+		auto delDoc = conn_.prepare("DELETE FROM fts_doc WHERE doc_id=?");
+		if(!delDoc) { return std::unexpected(delDoc.error()); }
+		if(auto result = delDoc->binds(docId); !result) { return std::unexpected(result.error()); }
+		if(auto done = delDoc->step(); !done) { return std::unexpected(done.error()); }
+	}
+
+	return {};
+}
+
 std::expected<bool, std::error_code> Index::remove(std::string_view personaId, std::string_view recordId)
 {
 	if(auto result = conn_.exec("BEGIN IMMEDIATE"); !result) { return std::unexpected(result.error()); }
 	auto rollback = Cleanup{[this] { (void)conn_.exec("ROLLBACK"); }};
 
-	std::int64_t docId = 0;
-	bool exists = false;
-	{
-		auto query = conn_.prepare("SELECT doc_id FROM fts_doc WHERE persona_id=? AND record_id=?");
-		if(!query) { return std::unexpected(query.error()); }
-		if(auto result = query->binds(personaId, recordId); !result)
-		{
-			return std::unexpected(result.error());
-		}
-
-		auto row = query->fetch(docId);
-		if(!row) { return std::unexpected(row.error()); }
-		exists = *row;
-	}
-
-	if(exists)
-	{
-		{
-			auto delFts = conn_.prepare("DELETE FROM l1_fts WHERE rowid=?");
-			if(!delFts) { return std::unexpected(delFts.error()); }
-			if(auto result = delFts->binds(docId); !result) { return std::unexpected(result.error()); }
-			if(auto done = delFts->step(); !done) { return std::unexpected(done.error()); }
-		}
-		{
-			auto delDoc = conn_.prepare("DELETE FROM fts_doc WHERE doc_id=?");
-			if(!delDoc) { return std::unexpected(delDoc.error()); }
-			if(auto result = delDoc->binds(docId); !result) { return std::unexpected(result.error()); }
-			if(auto done = delDoc->step(); !done) { return std::unexpected(done.error()); }
-		}
-	}
+	bool existed = false;
+	if(auto result = removeNoTxn(personaId, recordId, existed); !result) { return std::unexpected(result.error()); }
 
 	if(auto result = conn_.exec("COMMIT"); !result) { return std::unexpected(result.error()); }
 	resetCleans(rollback);
-	return exists;
+	return existed;
 }
 
 std::expected<std::vector<Hit>, std::error_code> Index::search(
