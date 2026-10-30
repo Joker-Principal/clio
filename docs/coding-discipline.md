@@ -27,3 +27,11 @@ guard.resetCleans();   // 成功路径上把回滚动作清掉；异常路径由
 ## 3. 模块布局
 
 见 [`../README.md`](../README.md) 的「模块布局约定」（具名模块 `herodotus.clio.<domain>`、`.cppm` 与 `.cpp` 同目录并列、汇总模块不重导出 `std`）。
+
+## 4. 时间表示
+
+- 所有时间列一律 **`INTEGER` 存 Unix 毫秒、UTC**，不用 `TEXT` 时间戳、不用本地时区。
+- 列名统一 `*_at` 后缀（`occurred_at` / `recorded_at` / `created_at` / `updated_at`），一眼能看出是时间点。
+- ⚠️ **SQLite 的日期函数默认按秒**：对毫秒列做 `date()` / `strftime()` / `datetime()` 运算前要先 `/ 1000`，否则得到几千倍偏移。
+- C++ 侧取当前时间统一走 `nowMs()`（`duration_cast<milliseconds>`），不要各处自己算。
+
